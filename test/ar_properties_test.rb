@@ -39,6 +39,10 @@ class PropertiesTest < ActiveSupport::TestCase
     assert_equal updated, original
   end
 
+  def test_no_duplicate_properties
+    assert_equal Bulb.properties.size, 4
+  end
+
   def test_type_constraint
     assert_raise(ActiveRecord::Properties::PropertyError) do
       Class.new(ActiveRecord::Base) do

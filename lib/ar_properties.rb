@@ -15,15 +15,15 @@ module ActiveRecord
 
     module ClassMethods
       def columns
-        @columns ||= properties.map(&:to_column)
+        @columns ||= properties.values.map(&:to_column)
       end
 
       def properties
-        @properties ||= []
+        @properties ||= {}
       end
 
       def property(*args)
-        Property.new(connection, *args).tap {|x| properties << x }
+        Property.new(connection, *args).tap {|x| properties[x.name.to_s] = x }
       end
 
       def timestamps(suffix=:at)
