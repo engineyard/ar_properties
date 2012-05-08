@@ -3,7 +3,6 @@ class Bulb < ActiveRecord::Base
   property :name, :string
   property :name, :string
   property :frickinawesome, :boolean, :default => false
-  property :car_id, :integer
 
   belongs_to :car
 end

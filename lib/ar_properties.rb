@@ -26,6 +26,11 @@ module ActiveRecord
         Property.new(connection, *args).tap {|x| properties[x.name.to_s] = x }
       end
 
+      def belongs_to(*a, &b)
+        property "#{a.first}_id", :integer
+        super
+      end
+
       def timestamps(suffix=:at)
         raise PropertyError, "unknown timestamps suffix: #{suffix.inspect}" unless %w[at on].include?(suffix.to_s)
         property :"created_#{suffix}", :time
